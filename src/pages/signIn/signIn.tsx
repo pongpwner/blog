@@ -1,9 +1,12 @@
 import React from "react";
 import SignInForm from "../../components/signInForm/signInForm";
-const SignIn = () => {
+interface signInProps {
+  setJWT: Function;
+}
+const SignIn = ({ setJWT }: signInProps) => {
   return (
     <div className="sign-in-page">
-      <SignInForm></SignInForm>
+      <SignInForm setJWT={setJWT}></SignInForm>
     </div>
   );
 };

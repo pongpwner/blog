@@ -1,6 +1,9 @@
 import "./signInForm.scss";
 import React, { useState } from "react";
-const SignInForm = () => {
+interface signInFormProps {
+  setJWT: Function;
+}
+const SignInForm = ({ setJWT }: signInFormProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,6 +29,7 @@ const SignInForm = () => {
 
     let data = await response.json();
     console.log(data);
+    setJWT(data.token);
     //save token to local storage
   }
 
