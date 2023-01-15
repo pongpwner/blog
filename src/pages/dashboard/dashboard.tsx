@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PostList from "../../components/postList/postList";
+import { IPost } from "../../App";
 interface IDashboardProps {
   JWT: string;
+  posts: [IPost] | null;
+  setPosts: Function;
 }
-const Dashboard = ({ JWT }: IDashboardProps) => {
+
+const Dashboard = ({ JWT, posts, setPosts }: IDashboardProps) => {
   useEffect(() => {
     async function checkAuth() {
       console.log(JWT);
@@ -18,6 +22,7 @@ const Dashboard = ({ JWT }: IDashboardProps) => {
       let data = await response.json();
       //do something with response
       console.log(data);
+      setPosts(data.posts);
     }
     // if (JWT !== "") {
     checkAuth();
@@ -26,7 +31,7 @@ const Dashboard = ({ JWT }: IDashboardProps) => {
   return (
     <div className="dashboard">
       <a href="/create-post">Create a New Post</a>
-      <PostList posts={[]}></PostList>
+      <PostList posts={posts}></PostList>
     </div>
   );
 };

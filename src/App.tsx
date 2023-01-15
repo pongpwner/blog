@@ -5,9 +5,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./pages/signIn/signIn";
 import Dashboard from "./pages/dashboard/dashboard";
 import CreatePost from "./pages/createPost/createPost";
-
+export interface IPost {
+  _id: string;
+  title: string;
+  content: string;
+  timestamp: Date;
+  published: boolean;
+}
 function App() {
   const [JWT, setJWT] = useState<string>("");
+  const [posts, setPosts] = useState<[IPost] | null>(null);
 
   // get jwt from localstorage
   useEffect(() => {
@@ -30,7 +37,13 @@ function App() {
           <Route path="/" element={<SignIn setJWT={setJWT}></SignIn>}></Route>
           <Route
             path="/dashboard"
-            element={<Dashboard JWT={JWT}></Dashboard>}
+            element={
+              <Dashboard
+                JWT={JWT}
+                posts={posts}
+                setPosts={setPosts}
+              ></Dashboard>
+            }
           ></Route>
           <Route path="/create-post" element={<CreatePost />}></Route>
         </Routes>
