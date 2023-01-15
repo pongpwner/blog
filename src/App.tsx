@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./pages/signIn/signIn";
 import Dashboard from "./pages/dashboard/dashboard";
 import CreatePost from "./pages/createPost/createPost";
+import EditPost from "./pages/editPost/editPost";
 export interface IPost {
   _id: string;
   title: string;
@@ -45,7 +46,8 @@ function App() {
               ></Dashboard>
             }
           ></Route>
-          <Route path="/create-post" element={<CreatePost />}></Route>
+          <Route path="/create-post" element={<CreatePost JWT={JWT} />}></Route>
+          <Route path="/post/:postId" element={<EditPost />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

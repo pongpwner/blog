@@ -14,7 +14,7 @@ const Post = ({ id, title, content, timestamp, published }: IPostProps) => {
       <div className="title">{title}</div>
       <div className="timestamp">{timestamp.toString()}</div>
       <button>publish</button>
-      <button>edit</button>
+      <a href={`/post/${id}`}>edit</a>
       <button>delete</button>
     </li>
   );
