@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface IPostFormProps {
   actionRoute: string;
@@ -7,7 +8,7 @@ interface IPostFormProps {
 }
 const PostForm = ({ actionRoute, method, JWT }: IPostFormProps) => {
   console.log(JWT);
-
+  const navigate = useNavigate();
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   function handleChange(
@@ -34,8 +35,11 @@ const PostForm = ({ actionRoute, method, JWT }: IPostFormProps) => {
       },
       body: JSON.stringify({ title: title, content: content }),
     });
-    let data = response.json();
+    let data = await response.json();
     console.log(data);
+    if (data.message === "post created") {
+      navigate("/dashboard");
+    }
   }
   return (
     <form

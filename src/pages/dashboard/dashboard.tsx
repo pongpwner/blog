@@ -31,7 +31,7 @@ const Dashboard = ({ JWT, posts, setPosts }: IDashboardProps) => {
   return (
     <div className="dashboard">
       <a href="/create-post">Create a New Post</a>
-      <PostList posts={posts}></PostList>
+      <PostList posts={posts} JWT={JWT}></PostList>
     </div>
   );
 };

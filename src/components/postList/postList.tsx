@@ -3,19 +3,22 @@ import Post from "../post/post";
 import { IPost } from "../../App";
 interface IPostListProps {
   posts: [IPost] | null;
+  JWT: string;
 }
-const PostList = ({ posts }: IPostListProps) => {
+const PostList = ({ posts, JWT }: IPostListProps) => {
   return (
     <ul>
       {posts
-        ? posts.map((post) => {
+        ? posts.map((post, i) => {
             return (
               <Post
+                key={i}
                 id={post._id}
                 title={post.title}
                 content={post.content}
                 timestamp={post.timestamp}
                 published={post.published}
+                JWT={JWT}
               ></Post>
             );
           })

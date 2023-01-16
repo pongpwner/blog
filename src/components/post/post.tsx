@@ -6,16 +6,60 @@ interface IPostProps {
   content: string;
   timestamp: Date;
   published: boolean;
+  JWT: string;
 }
 
-const Post = ({ id, title, content, timestamp, published }: IPostProps) => {
+const Post = ({
+  id,
+  title,
+  content,
+  timestamp,
+  published,
+  JWT,
+}: IPostProps) => {
+  async function togglePublishPost() {
+    console.log(published);
+    let response = await fetch(`http://localhost:5000/posts/${id}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${JWT}`,
+      },
+
+      body: JSON.stringify({
+        title: title,
+        content: content,
+        published: !published,
+      }),
+    });
+    let data = await response.json();
+    console.log(data);
+    window.location.reload();
+  }
+  async function deletePost() {
+    await fetch(`http://localhost:5000/posts/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${JWT}`,
+      },
+    });
+
+    window.location.reload();
+  }
   return (
     <li className="post">
       <div className="title">{title}</div>
       <div className="timestamp">{timestamp.toString()}</div>
-      <button>publish</button>
+      {published ? (
+        <button onClick={togglePublishPost}>unpublish</button>
+      ) : (
+        <button onClick={togglePublishPost}>publish</button>
+      )}
       <a href={`/post/${id}`}>edit</a>
-      <button>delete</button>
+      <button onClick={deletePost}>delete</button>
     </li>
   );
 };
