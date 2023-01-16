@@ -47,7 +47,7 @@ function App() {
             }
           ></Route>
           <Route path="/create-post" element={<CreatePost JWT={JWT} />}></Route>
-          <Route path="/post/:postId" element={<EditPost />}></Route>
+          <Route path="/post/:postId" element={<EditPost JWT={JWT} />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

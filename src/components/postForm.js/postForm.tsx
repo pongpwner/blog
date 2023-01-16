@@ -1,26 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { IPost } from "../../App";
 
 interface IPostFormProps {
   actionRoute: string;
   method?: "PUT" | "POST";
   JWT: string;
+  currentPost?: IPost | null;
 }
-const PostForm = ({ actionRoute, method, JWT }: IPostFormProps) => {
-  console.log(JWT);
+const PostForm = ({
+  actionRoute,
+  method,
+  JWT,
+  currentPost,
+}: IPostFormProps) => {
   const navigate = useNavigate();
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+  const [title1, setTitle1] = useState<string | null>(
+    currentPost ? currentPost.title : ""
+  );
+  const [content1, setContent1] = useState<string | null>(
+    currentPost ? currentPost.content : ""
+  );
+  useEffect(() => {
+    if (currentPost) {
+      setTitle1(currentPost.title);
+      setContent1(currentPost.content);
+    }
+  }, [currentPost]);
+
   function handleChange(
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ): void {
     if (e.target.name === "title") {
-      setTitle(e.target.value);
+      setTitle1(e.target.value);
     }
     if (e.target.name === "content") {
-      setContent(e.target.value);
+      setContent1(e.target.value);
     }
   }
 
@@ -33,7 +50,7 @@ const PostForm = ({ actionRoute, method, JWT }: IPostFormProps) => {
         "Content-Type": "application/json",
         authorization: `Bearer ${JWT}`,
       },
-      body: JSON.stringify({ title: title, content: content }),
+      body: JSON.stringify({ title: title1, content: content1 }),
     });
     let data = await response.json();
     console.log(data);
@@ -48,12 +65,12 @@ const PostForm = ({ actionRoute, method, JWT }: IPostFormProps) => {
       onSubmit={handleSubmit}
       className="post-form"
     >
-      <label htmlFor="title">label:</label>
+      <label htmlFor="title">title:</label>
       <input
         type="text"
         id="title"
         name="title"
-        value={title}
+        value={title1!}
         onChange={(e) => handleChange(e)}
       />
       <label htmlFor="content">content:</label>
@@ -62,7 +79,7 @@ const PostForm = ({ actionRoute, method, JWT }: IPostFormProps) => {
         id="content"
         cols={30}
         rows={10}
-        value={content}
+        value={content1!}
         onChange={(e) => handleChange(e)}
       ></textarea>
       <button type="submit">Submit</button>

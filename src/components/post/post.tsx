@@ -1,5 +1,6 @@
 import { link } from "fs";
 import React from "react";
+import { Link } from "react-router-dom";
 interface IPostProps {
   id: string;
   title: string;
@@ -58,7 +59,8 @@ const Post = ({
       ) : (
         <button onClick={togglePublishPost}>publish</button>
       )}
-      <a href={`/post/${id}`}>edit</a>
+      <Link to={`/post/${id}`}>edit</Link>
+
       <button onClick={deletePost}>delete</button>
     </li>
   );
