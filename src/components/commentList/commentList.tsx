@@ -1,0 +1,40 @@
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import Comment from "../comment/comment";
+export interface IComment {
+  _id?: string;
+  author: string;
+  content: string;
+  timestamp: Date;
+  postId: string;
+}
+const CommentList = () => {
+  const [comments, setComments] = useState<[IComment] | null>(null);
+  const { postId } = useParams();
+  //fetch
+  useEffect(() => {
+    async function getComments() {
+      let data = await fetch(`http://localhost:5000/posts/${postId}/comments`);
+      let response = await data.json();
+      console.log(response);
+    }
+  }, []);
+
+  return comments ? (
+    <ul>
+      {comments.map((comment) => (
+        <Comment
+          author={comment.author}
+          content={comment.author}
+          timestamp={comment.timestamp}
+          postId={comment.postId}
+          id={comment._id}
+        />
+      ))}
+    </ul>
+  ) : (
+    <div>there are no comments</div>
+  );
+};
+
+export default CommentList;

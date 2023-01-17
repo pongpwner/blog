@@ -59,7 +59,7 @@ const Post = ({
       ) : (
         <button onClick={togglePublishPost}>publish</button>
       )}
-      <Link to={`/post/${id}`}>edit</Link>
+      <Link to={`/posts/${id}`}>edit</Link>
 
       <button onClick={deletePost}>delete</button>
     </li>

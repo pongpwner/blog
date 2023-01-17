@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PostForm from "../../components/postForm.js/postForm";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { IPost } from "../../App";
 interface IEditPost {
   JWT: string;
@@ -28,6 +28,7 @@ const EditPost = ({ JWT }: IEditPost) => {
 
   return (
     <div>
+      <Link to="/posts/:postId/comments">View comments</Link>
       <PostForm
         JWT={JWT}
         currentPost={currentPost}

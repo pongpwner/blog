@@ -6,6 +6,7 @@ interface IPostListProps {
   JWT: string;
 }
 const PostList = ({ posts, JWT }: IPostListProps) => {
+  //move fetch to this component
   return (
     <ul>
       {posts
