@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PostForm from "../../components/postForm.js/postForm";
 import { useParams, Link } from "react-router-dom";
 import { IPost } from "../../App";
+import CommentList from "../../components/commentList/commentList";
 interface IEditPost {
   JWT: string;
 }
@@ -28,13 +29,15 @@ const EditPost = ({ JWT }: IEditPost) => {
 
   return (
     <div>
-      <Link to="/posts/:postId/comments">View comments</Link>
       <PostForm
         JWT={JWT}
         currentPost={currentPost}
         method="PUT"
         actionRoute={`http://localhost:5000/posts/${postId}`}
       ></PostForm>
+
+      <h2>comments</h2>
+      <CommentList JWT={JWT}></CommentList>
     </div>
   );
 };
@@ -43,3 +46,4 @@ export default EditPost;
 // {postId}
 
 // ;
+//<Link to="/posts/:postId/comments">View comments</Link>

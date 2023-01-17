@@ -8,16 +8,27 @@ export interface IComment {
   timestamp: Date;
   postId: string;
 }
-const CommentList = () => {
+interface ICommentListProps {
+  JWT: string;
+}
+const CommentList = ({ JWT }: ICommentListProps) => {
   const [comments, setComments] = useState<[IComment] | null>(null);
   const { postId } = useParams();
   //fetch
   useEffect(() => {
     async function getComments() {
-      let data = await fetch(`http://localhost:5000/posts/${postId}/comments`);
+      let data = await fetch(`http://localhost:5000/posts/${postId}/comments`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       let response = await data.json();
       console.log(response);
+      setComments(response.comments);
     }
+    getComments();
   }, []);
 
   return comments ? (
@@ -29,6 +40,7 @@ const CommentList = () => {
           timestamp={comment.timestamp}
           postId={comment.postId}
           id={comment._id}
+          JWT={JWT}
         />
       ))}
     </ul>

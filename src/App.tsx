@@ -6,7 +6,7 @@ import SignIn from "./pages/signIn/signIn";
 import Dashboard from "./pages/dashboard/dashboard";
 import CreatePost from "./pages/createPost/createPost";
 import EditPost from "./pages/editPost/editPost";
-import PostComments from "./pages/postComment/postComments";
+//import PostComments from "./pages/postComment/postComments";
 export interface IPost {
   _id: string;
   title: string;
@@ -49,10 +49,6 @@ function App() {
           ></Route>
           <Route path="/create-post" element={<CreatePost JWT={JWT} />}></Route>
           <Route path="/posts/:postId" element={<EditPost JWT={JWT} />}></Route>
-          <Route
-            path="/posts/:postId/comments"
-            element={<PostComments></PostComments>}
-          ></Route>
         </Routes>
       </BrowserRouter>
     </div>
@@ -60,3 +56,9 @@ function App() {
 }
 
 export default App;
+{
+  /* <Route
+path="/posts/:postId/comments"
+element={<PostComments></PostComments>}
+></Route> */
+}
