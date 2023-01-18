@@ -6,6 +6,7 @@ import SignIn from "./pages/signIn/signIn";
 import Dashboard from "./pages/dashboard/dashboard";
 import CreatePost from "./pages/createPost/createPost";
 import EditPost from "./pages/editPost/editPost";
+import Header from "./components/header/header.component";
 //import PostComments from "./pages/postComment/postComments";
 export interface IPost {
   _id: string;
@@ -16,6 +17,7 @@ export interface IPost {
 }
 function App() {
   const [JWT, setJWT] = useState<string>("");
+  const [user, setUser] = useState<string | null>(null);
   const [posts, setPosts] = useState<[IPost] | null>(null);
 
   // get jwt from localstorage
@@ -35,8 +37,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Header user={user} setUser={setUser}></Header>
         <Routes>
-          <Route path="/" element={<SignIn setJWT={setJWT}></SignIn>}></Route>
+          <Route
+            path="/"
+            element={<SignIn setJWT={setJWT} setUser={setUser}></SignIn>}
+          ></Route>
           <Route
             path="/dashboard"
             element={

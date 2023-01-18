@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 interface signInFormProps {
   setJWT: Function;
+  setUser: Function;
 }
-const SignInForm = ({ setJWT }: signInFormProps) => {
+const SignInForm = ({ setJWT, setUser }: signInFormProps) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +33,9 @@ const SignInForm = ({ setJWT }: signInFormProps) => {
     let data = await response.json();
     console.log(data);
     setJWT(data.token);
+
     if (data.token) {
+      setUser(data.user.username);
       navigate("/dashboard");
     }
   }
