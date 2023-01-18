@@ -7,7 +7,6 @@ interface signInProps {
 const SignIn = ({ setJWT }: signInProps) => {
   return (
     <div className="sign-in-page">
-      <Link to={"/dashboard"}>dashboard</Link>
       <SignInForm setJWT={setJWT}></SignInForm>
     </div>
   );
