@@ -1,4 +1,20 @@
 import React from "react";
+import styled from "styled-components";
+const P = styled.p`
+  overflow-wrap: break-word;
+`;
+const Author = styled.span`
+  font-weight: 700;
+`;
+const Li = styled.li`
+  margin: 2rem 3rem;
+`;
+const Time = styled.span`
+  font-style: italic;
+`;
+const Content = styled.p`
+  overflow-wrap: break-word;
+`;
 
 interface ICommentProps {
   id?: string;
@@ -28,12 +44,18 @@ const Comment = ({
     window.location.reload();
   }
   return (
-    <div className="comment">
-      <span>{author}</span>
-      <span>{content}</span>
-      <span>{timestamp.toString()}</span>
+    <Li className="comment">
+      <Author>{author}</Author>
+      <Content>{content}</Content>
+      <Time>
+        {new Date(timestamp).toLocaleDateString("en-us", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}
+      </Time>
       <button onClick={deleteComment}>delete comment</button>
-    </div>
+    </Li>
   );
 };
 

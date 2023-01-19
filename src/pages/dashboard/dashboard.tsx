@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PostList from "../../components/postList/postList";
+import { Link } from "react-router-dom";
 import { IPost } from "../../App";
 interface IDashboardProps {
   JWT: string;
@@ -30,7 +31,6 @@ const Dashboard = ({ JWT, posts, setPosts }: IDashboardProps) => {
   }, [JWT]);
   return (
     <div className="dashboard">
-      <a href="/create-post">Create a New Post</a>
       <PostList posts={posts} JWT={JWT}></PostList>
     </div>
   );

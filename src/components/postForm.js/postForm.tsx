@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IPost } from "../../App";
+import styled from "styled-components";
 
 interface IPostFormProps {
   actionRoute: string;
@@ -66,22 +67,27 @@ const PostForm = ({
       className="post-form"
     >
       <label htmlFor="title">title:</label>
-      <input
-        type="text"
-        id="title"
-        name="title"
-        value={title1!}
-        onChange={(e) => handleChange(e)}
-      />
+      <div>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={title1!}
+          onChange={(e) => handleChange(e)}
+        />
+      </div>
       <label htmlFor="content">content:</label>
-      <textarea
-        name="content"
-        id="content"
-        cols={30}
-        rows={10}
-        value={content1!}
-        onChange={(e) => handleChange(e)}
-      ></textarea>
+      <div>
+        <textarea
+          name="content"
+          id="content"
+          cols={100}
+          rows={40}
+          value={content1!}
+          onChange={(e) => handleChange(e)}
+        ></textarea>
+      </div>
+
       <button type="submit">Submit</button>
     </form>
   );

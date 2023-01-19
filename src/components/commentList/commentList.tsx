@@ -36,7 +36,7 @@ const CommentList = ({ JWT }: ICommentListProps) => {
       {comments.map((comment) => (
         <Comment
           author={comment.author}
-          content={comment.author}
+          content={comment.content}
           timestamp={comment.timestamp}
           postId={comment.postId}
           id={comment._id}

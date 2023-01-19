@@ -7,6 +7,7 @@ import Dashboard from "./pages/dashboard/dashboard";
 import CreatePost from "./pages/createPost/createPost";
 import EditPost from "./pages/editPost/editPost";
 import Header from "./components/header/header.component";
+import GlobalStyle from "./global.styles";
 //import PostComments from "./pages/postComment/postComments";
 export interface IPost {
   _id: string;
@@ -36,6 +37,7 @@ function App() {
   }, [JWT]);
   return (
     <div className="App">
+      <GlobalStyle></GlobalStyle>
       <BrowserRouter>
         <Header user={user} setUser={setUser}></Header>
         <Routes>

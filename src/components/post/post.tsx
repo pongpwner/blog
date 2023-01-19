@@ -1,5 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const FlexContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+`;
 interface IPostProps {
   id: string;
   title: string;
@@ -52,15 +59,23 @@ const Post = ({
   return (
     <li className="post">
       <div className="title">{title}</div>
-      <div className="timestamp">{timestamp.toString()}</div>
-      {published ? (
-        <button onClick={togglePublishPost}>unpublish</button>
-      ) : (
-        <button onClick={togglePublishPost}>publish</button>
-      )}
-      <Link to={`/posts/${id}`}>edit</Link>
+      <div className="timestamp">
+        {new Date(timestamp).toLocaleDateString("en-us", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}
+      </div>
+      <FlexContainer>
+        {published ? (
+          <button onClick={togglePublishPost}>unpublish</button>
+        ) : (
+          <button onClick={togglePublishPost}>publish</button>
+        )}
+        <Link to={`/posts/${id}`}>edit</Link>
 
-      <button onClick={deletePost}>delete</button>
+        <button onClick={deletePost}>delete</button>
+      </FlexContainer>
     </li>
   );
 };
