@@ -8,7 +8,7 @@ const CreatePost = ({ JWT }: ICreatePostProps) => {
     <div className="create-post">
       <PostForm
         method="POST"
-        actionRoute={`http://localhost:5000/posts/`}
+        actionRoute={`https://blog-api-production-9a5f.up.railway.app/posts/`}
         JWT={JWT}
       ></PostForm>
     </div>

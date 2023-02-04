@@ -26,26 +26,29 @@ const Post = ({
 }: IPostProps) => {
   async function togglePublishPost() {
     console.log(published);
-    let response = await fetch(`http://localhost:5000/posts/${id}`, {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${JWT}`,
-      },
+    let response = await fetch(
+      `https://blog-api-production-9a5f.up.railway.app/posts/${id}`,
+      {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${JWT}`,
+        },
 
-      body: JSON.stringify({
-        title: title,
-        content: content,
-        published: !published,
-      }),
-    });
+        body: JSON.stringify({
+          title: title,
+          content: content,
+          published: !published,
+        }),
+      }
+    );
     let data = await response.json();
     console.log(data);
     window.location.reload();
   }
   async function deletePost() {
-    await fetch(`http://localhost:5000/posts/${id}`, {
+    await fetch(`https://blog-api-production-9a5f.up.railway.app/posts/${id}`, {
       method: "DELETE",
       credentials: "include",
       headers: {

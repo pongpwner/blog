@@ -17,13 +17,16 @@ const CommentList = ({ JWT }: ICommentListProps) => {
   //fetch
   useEffect(() => {
     async function getComments() {
-      let data = await fetch(`http://localhost:5000/posts/${postId}/comments`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      let data = await fetch(
+        `https://blog-api-production-9a5f.up.railway.appposts/${postId}/comments`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       let response = await data.json();
       console.log(response);
       setComments(response.comments);

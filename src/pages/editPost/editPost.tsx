@@ -12,14 +12,17 @@ const EditPost = ({ JWT }: IEditPost) => {
 
   useEffect(() => {
     async function getPost() {
-      let response = await fetch(`http://localhost:5000/posts/${postId}`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${JWT}`,
-        },
-      });
+      let response = await fetch(
+        `https://blog-api-production-9a5f.up.railway.app/${postId}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${JWT}`,
+          },
+        }
+      );
       let data = await response.json();
       console.log(data.post);
       setCurrentPost(data.post);
@@ -33,7 +36,7 @@ const EditPost = ({ JWT }: IEditPost) => {
         JWT={JWT}
         currentPost={currentPost}
         method="PUT"
-        actionRoute={`http://localhost:5000/posts/${postId}`}
+        actionRoute={`https://blog-api-production-9a5f.up.railway.app/${postId}`}
       ></PostForm>
 
       <h2>comments</h2>

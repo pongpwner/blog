@@ -33,14 +33,17 @@ const Comment = ({
   JWT,
 }: ICommentProps) => {
   async function deleteComment() {
-    await fetch(`http://localhost:5000/posts/${postId}/comments/${id}`, {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${JWT}`,
-      },
-    });
+    await fetch(
+      `https://blog-api-production-9a5f.up.railway.app/posts/${postId}/comments/${id}`,
+      {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${JWT}`,
+        },
+      }
+    );
     window.location.reload();
   }
   return (

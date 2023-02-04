@@ -21,14 +21,17 @@ const SignInForm = ({ setJWT, setUser }: signInFormProps) => {
   async function postSignInInfo(event: React.SyntheticEvent): Promise<any> {
     console.log("yeaaaaaa");
     event.preventDefault();
-    let response = await fetch("http://localhost:5000/sign-in", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username: username, password: password }),
-    });
+    let response = await fetch(
+      "https://blog-api-production-9a5f.up.railway.app/sign-in",
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username, password: password }),
+      }
+    );
 
     let data = await response.json();
     console.log(data);
@@ -42,7 +45,7 @@ const SignInForm = ({ setJWT, setUser }: signInFormProps) => {
 
   return (
     <form
-      action="http://localhost:5000/sign-in"
+      action="https://blog-api-production-9a5f.up.railway.app/sign-in"
       className="sign-in-form"
       method="POST"
       onSubmit={postSignInInfo}
