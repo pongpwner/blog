@@ -39,7 +39,7 @@ function App() {
     <div className="App">
       <GlobalStyle></GlobalStyle>
       <BrowserRouter>
-        <Header user={user} setUser={setUser}></Header>
+        <Header user={user} setUser={setUser} setJWT={setJWT}></Header>
         <Routes>
           <Route
             path="/"
