@@ -56,6 +56,18 @@ const Post = ({
         authorization: `Bearer ${JWT}`,
       },
     });
+    // delete comments with same post id
+    await fetch(
+      `https://blog-api-production-9a5f.up.railway.app/posts/${id}/comments`,
+      {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${JWT}`,
+        },
+      }
+    );
 
     window.location.reload();
   }
