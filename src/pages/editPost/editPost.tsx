@@ -13,7 +13,7 @@ const EditPost = ({ JWT }: IEditPost) => {
   useEffect(() => {
     async function getPost() {
       let response = await fetch(
-        `https://blog-api-production-9a5f.up.railway.app/${postId}`,
+        `https://blog-api-production-9a5f.up.railway.app/posts/${postId}`,
         {
           method: "GET",
           credentials: "include",
