@@ -18,7 +18,7 @@ const CommentList = ({ JWT }: ICommentListProps) => {
   useEffect(() => {
     async function getComments() {
       let data = await fetch(
-        `https://blog-api-production-9a5f.up.railway.appposts/${postId}/comments`,
+        `https://blog-api-production-9a5f.up.railway.app/posts/${postId}/comments`,
         {
           method: "GET",
           credentials: "include",
