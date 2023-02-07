@@ -36,7 +36,7 @@ const EditPost = ({ JWT }: IEditPost) => {
         JWT={JWT}
         currentPost={currentPost}
         method="PUT"
-        actionRoute={`https://blog-api-production-9a5f.up.railway.app/${postId}`}
+        actionRoute={`https://blog-api-production-9a5f.up.railway.app/posts/${postId}`}
       ></PostForm>
 
       <h2>comments</h2>
