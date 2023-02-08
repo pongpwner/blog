@@ -54,7 +54,7 @@ const PostForm = ({
       body: JSON.stringify({ title: title1, content: content1 }),
     });
     let data = await response.json();
-    console.log(data);
+
     if (data.message === "post created") {
       navigate("/dashboard");
     }

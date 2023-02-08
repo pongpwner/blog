@@ -24,7 +24,7 @@ const EditPost = ({ JWT }: IEditPost) => {
         }
       );
       let data = await response.json();
-      console.log(data.post);
+
       setCurrentPost(data.post);
     }
     getPost();

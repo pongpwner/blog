@@ -6,20 +6,25 @@ interface IHeaderProps {
   user: string | null;
   setUser: Function;
   setJWT: Function;
+  setPosts: Function;
 }
 const HeaderContainer = styled.header`
   display: flex;
   gap: 1rem;
   justify-content: center;
 `;
-const Header = ({ user, setUser, setJWT }: IHeaderProps) => {
+const Header = ({ user, setUser, setJWT, setPosts }: IHeaderProps) => {
   return (
     <HeaderContainer>
       <Link to="/create-post">Create a New Post</Link>
       <Link to="/dashboard">dashboard</Link>
       {user ? <span>{user}</span> : null}
       {user ? (
-        <LogoutButton setUser={setUser} setJWT={setJWT}></LogoutButton>
+        <LogoutButton
+          setUser={setUser}
+          setJWT={setJWT}
+          setPosts={setPosts}
+        ></LogoutButton>
       ) : (
         <Link to="/">sign-in</Link>
       )}

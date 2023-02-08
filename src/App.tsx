@@ -26,6 +26,8 @@ function App() {
     let tokenFromStorage = localStorage.getItem("jwt");
     if (tokenFromStorage) {
       setJWT(tokenFromStorage);
+      let userFromStorage = localStorage.getItem("blogAdmin");
+      setUser(userFromStorage);
     }
   }, []);
   //put jwt in localstorage
@@ -33,13 +35,19 @@ function App() {
     localStorage.setItem("jwt", JWT);
   }, [JWT]);
   useEffect(() => {
-    console.log(JWT);
-  }, [JWT]);
+    localStorage.setItem("blogAdmin", user!);
+  }, [user]);
+
   return (
     <div className="App">
       <GlobalStyle></GlobalStyle>
       <BrowserRouter>
-        <Header user={user} setUser={setUser} setJWT={setJWT}></Header>
+        <Header
+          user={user}
+          setUser={setUser}
+          setJWT={setJWT}
+          setPosts={setPosts}
+        ></Header>
         <Routes>
           <Route
             path="/"

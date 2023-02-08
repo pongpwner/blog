@@ -11,7 +11,6 @@ interface IDashboardProps {
 const Dashboard = ({ JWT, posts, setPosts }: IDashboardProps) => {
   useEffect(() => {
     async function checkAuth() {
-      console.log(JWT);
       let response = await fetch(
         "https://blog-api-production-9a5f.up.railway.app/dashboard",
         {
@@ -25,7 +24,7 @@ const Dashboard = ({ JWT, posts, setPosts }: IDashboardProps) => {
       );
       let data = await response.json();
       //do something with response
-      console.log(data);
+
       setPosts(data.posts);
     }
     // if (JWT !== "") {

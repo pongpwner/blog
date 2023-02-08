@@ -25,7 +25,6 @@ const Post = ({
   JWT,
 }: IPostProps) => {
   async function togglePublishPost() {
-    console.log(published);
     let response = await fetch(
       `https://blog-api-production-9a5f.up.railway.app/posts/${id}`,
       {
@@ -44,7 +43,7 @@ const Post = ({
       }
     );
     let data = await response.json();
-    console.log(data);
+
     window.location.reload();
   }
   async function deletePost() {

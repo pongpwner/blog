@@ -28,7 +28,7 @@ const CommentList = ({ JWT }: ICommentListProps) => {
         }
       );
       let response = await data.json();
-      console.log(response);
+
       setComments(response.comments);
     }
     getComments();
