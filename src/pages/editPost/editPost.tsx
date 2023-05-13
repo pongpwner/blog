@@ -3,6 +3,7 @@ import PostForm from "../../components/postForm.js/postForm";
 import { useParams, Link } from "react-router-dom";
 import { IPost } from "../../App";
 import CommentList from "../../components/commentList/commentList";
+import { origin } from "../../App";
 interface IEditPost {
   JWT: string;
 }
@@ -12,17 +13,14 @@ const EditPost = ({ JWT }: IEditPost) => {
 
   useEffect(() => {
     async function getPost() {
-      let response = await fetch(
-        `https://blog-api-production-9a5f.up.railway.app/posts/${postId}`,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${JWT}`,
-          },
-        }
-      );
+      let response = await fetch(`${origin}/posts/${postId}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${JWT}`,
+        },
+      });
       let data = await response.json();
 
       setCurrentPost(data.post);
@@ -36,7 +34,7 @@ const EditPost = ({ JWT }: IEditPost) => {
         JWT={JWT}
         currentPost={currentPost}
         method="PUT"
-        actionRoute={`https://blog-api-production-9a5f.up.railway.app/posts/${postId}`}
+        actionRoute={`${origin}/posts/${postId}`}
       ></PostForm>
 
       <h2>comments</h2>

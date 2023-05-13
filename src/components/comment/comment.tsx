@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { origin } from "../../App";
 const P = styled.p`
   overflow-wrap: break-word;
 `;
@@ -33,17 +34,14 @@ const Comment = ({
   JWT,
 }: ICommentProps) => {
   async function deleteComment() {
-    await fetch(
-      `https://blog-api-production-9a5f.up.railway.app/posts/${postId}/comments/${id}`,
-      {
-        method: "DELETE",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${JWT}`,
-        },
-      }
-    );
+    await fetch(`${origin}/posts/${postId}/comments/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${JWT}`,
+      },
+    });
     window.location.reload();
   }
   return (

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IPost } from "../../App";
 import styled from "styled-components";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import parse from "html-react-parser";
 
 interface IPostFormProps {
   actionRoute: string;
@@ -9,6 +12,11 @@ interface IPostFormProps {
   JWT: string;
   currentPost?: IPost | null;
 }
+const Container = styled.div`
+  margin: 2rem auto;
+  width: 80%;
+`;
+
 const PostForm = ({
   actionRoute,
   method,
@@ -22,10 +30,14 @@ const PostForm = ({
   const [content1, setContent1] = useState<string | null>(
     currentPost ? currentPost.content : ""
   );
+  const [category1, setCategory1] = useState<string | null | undefined>(
+    currentPost ? currentPost.category : ""
+  );
   useEffect(() => {
     if (currentPost) {
       setTitle1(currentPost.title);
       setContent1(currentPost.content);
+      setCategory1(currentPost.category);
     }
   }, [currentPost]);
 
@@ -40,10 +52,14 @@ const PostForm = ({
     if (e.target.name === "content") {
       setContent1(e.target.value);
     }
+    if (e.target.name === "category") {
+      setCategory1(e.target.value);
+    }
   }
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
+    console.log("submit");
     let response = await fetch(actionRoute, {
       method: method,
       credentials: "include",
@@ -51,7 +67,11 @@ const PostForm = ({
         "Content-Type": "application/json",
         authorization: `Bearer ${JWT}`,
       },
-      body: JSON.stringify({ title: title1, content: content1 }),
+      body: JSON.stringify({
+        title: title1,
+        content: content1,
+        category: category1,
+      }),
     });
     let data = await response.json();
 
@@ -60,36 +80,80 @@ const PostForm = ({
     }
   }
   return (
-    <form
-      action={actionRoute}
-      method="POST"
-      onSubmit={handleSubmit}
-      className="post-form"
-    >
+    <Container>
       <label htmlFor="title">title:</label>
-      <div>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={title1!}
-          onChange={(e) => handleChange(e)}
-        />
-      </div>
-      <label htmlFor="content">content:</label>
-      <div>
-        <textarea
-          name="content"
-          id="content"
-          cols={100}
-          rows={40}
-          value={content1!}
-          onChange={(e) => handleChange(e)}
-        ></textarea>
-      </div>
 
-      <button type="submit">Submit</button>
-    </form>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value={title1!}
+        onChange={(e) => handleChange(e)}
+      />
+      <label htmlFor="title">category:</label>
+
+      <input
+        type="text"
+        id="category"
+        name="category"
+        value={category1!}
+        onChange={(e) => handleChange(e)}
+      />
+      <CKEditor
+        editor={ClassicEditor}
+        data={`${content1}`}
+        onReady={(editor) => {
+          // You can store the "editor" and use when it is needed.
+          console.log("Editor is ready to use!", editor);
+        }}
+        onChange={(event, editor) => {
+          const data = editor.getData();
+          console.log(editor.getData());
+          setContent1(data);
+        }}
+        onBlur={(event, editor) => {
+          console.log("Blur.", editor);
+        }}
+        onFocus={(event, editor) => {
+          console.log("Focus.", editor);
+        }}
+      />
+      <button onClick={handleSubmit}> post</button>
+      <div>{parse(content1!)}</div>
+    </Container>
   );
 };
 export default PostForm;
+
+{
+  /* <form
+action={actionRoute}
+method="POST"
+onSubmit={handleSubmit}
+className="post-form"
+>
+<label htmlFor="title">title:</label>
+<div>
+  <input
+    type="text"
+    id="title"
+    name="title"
+    value={title1!}
+    onChange={(e) => handleChange(e)}
+  />
+</div>
+<label htmlFor="content">content:</label>
+<div>
+  <textarea
+    name="content"
+    id="content"
+    cols={100}
+    rows={40}
+    value={content1!}
+    onChange={(e) => handleChange(e)}
+  ></textarea>
+</div>
+
+<button type="submit">Submit</button>
+</form> */
+}

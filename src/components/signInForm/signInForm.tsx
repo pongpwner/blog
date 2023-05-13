@@ -1,6 +1,7 @@
 import "./signInForm.scss";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { origin } from "../../App";
 interface signInFormProps {
   setJWT: Function;
   setUser: Function;
@@ -20,17 +21,14 @@ const SignInForm = ({ setJWT, setUser }: signInFormProps) => {
   }
   async function postSignInInfo(event: React.SyntheticEvent): Promise<any> {
     event.preventDefault();
-    let response = await fetch(
-      "https://blog-api-production-9a5f.up.railway.app/sign-in",
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username: username, password: password }),
-      }
-    );
+    let response = await fetch(`${origin}/sign-in`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username: username, password: password }),
+    });
 
     let data = await response.json();
 
@@ -44,7 +42,7 @@ const SignInForm = ({ setJWT, setUser }: signInFormProps) => {
 
   return (
     <form
-      action="https://blog-api-production-9a5f.up.railway.app/sign-in"
+      action={`${origin}/sign-in`}
       className="sign-in-form"
       method="POST"
       onSubmit={postSignInInfo}

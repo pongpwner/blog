@@ -9,10 +9,13 @@ import EditPost from "./pages/editPost/editPost";
 import Header from "./components/header/header.component";
 import GlobalStyle from "./global.styles";
 //import PostComments from "./pages/postComment/postComments";
+//https://blog-api-production-9a5f.up.railway.app
+export const origin = "http://localhost:5000";
 export interface IPost {
   _id: string;
   title: string;
   content: string;
+  category?: string | undefined;
   timestamp: Date;
   published: boolean;
 }

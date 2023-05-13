@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Comment from "../comment/comment";
+import { origin } from "../../App";
 export interface IComment {
   _id?: string;
   author: string;
@@ -17,16 +18,13 @@ const CommentList = ({ JWT }: ICommentListProps) => {
   //fetch
   useEffect(() => {
     async function getComments() {
-      let data = await fetch(
-        `https://blog-api-production-9a5f.up.railway.app/posts/${postId}/comments`,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      let data = await fetch(`${origin}/posts/${postId}/comments`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       let response = await data.json();
 
       setComments(response.comments);

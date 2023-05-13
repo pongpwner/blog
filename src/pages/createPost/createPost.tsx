@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import PostForm from "../../components/postForm.js/postForm";
+import { origin } from "../../App";
 interface ICreatePostProps {
   JWT: string;
 }
@@ -8,7 +9,7 @@ const CreatePost = ({ JWT }: ICreatePostProps) => {
     <div className="create-post">
       <PostForm
         method="POST"
-        actionRoute={`https://blog-api-production-9a5f.up.railway.app/posts/`}
+        actionRoute={`${origin}/posts/`}
         JWT={JWT}
       ></PostForm>
     </div>
