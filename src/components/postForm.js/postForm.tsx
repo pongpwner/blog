@@ -6,6 +6,13 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import parse from "html-react-parser";
 
+// import ImageInsert from "@ckeditor/ckeditor5-image/src/imageinsert";
+// const editorPlaceholder = document.querySelector("#editor") as HTMLElement;
+// ClassicEditor.create(editorPlaceholder, {
+//   plugins: [ImageInsert],
+//   toolbar: ["imageInsert"],
+// });
+
 interface IPostFormProps {
   actionRoute: string;
   method?: "PUT" | "POST";
