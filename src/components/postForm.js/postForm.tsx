@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import parse from "html-react-parser";
+import Tiptap from "./tiptap";
 
 // import ImageInsert from "@ckeditor/ckeditor5-image/src/imageinsert";
 // const editorPlaceholder = document.querySelector("#editor") as HTMLElement;
@@ -106,27 +107,13 @@ const PostForm = ({
         value={category1!}
         onChange={(e) => handleChange(e)}
       />
-      <CKEditor
-        editor={ClassicEditor}
-        data={`${content1}`}
-        onReady={(editor) => {
-          // You can store the "editor" and use when it is needed.
-          console.log("Editor is ready to use!", editor);
-        }}
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          console.log(editor.getData());
-          setContent1(data);
-        }}
-        onBlur={(event, editor) => {
-          console.log("Blur.", editor);
-        }}
-        onFocus={(event, editor) => {
-          console.log("Focus.", editor);
-        }}
-      />
+      {content1 ? (
+        <Tiptap content={content1} onChange={setContent1}></Tiptap>
+      ) : null}
+
       <button onClick={handleSubmit}> post</button>
       <div>{parse(content1!)}</div>
+      <div>{content1!}</div>
     </Container>
   );
 };

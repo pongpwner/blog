@@ -7,6 +7,13 @@ const FlexContainer = styled.div`
   gap: 1rem;
   justify-content: center;
 `;
+const FlexContainer1 = styled.div`
+  display: flex;
+
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
 interface IPostProps {
   id: string;
   title: string;
@@ -69,15 +76,17 @@ const Post = ({
   }
   return (
     <li className="post">
-      <div className="title">{title}</div>
-      <div>{category}</div>
-      <div className="timestamp">
-        {new Date(timestamp).toLocaleDateString("en-us", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })}
-      </div>
+      <FlexContainer1>
+        <h2 className="title">{title}</h2>
+        <div>{category}</div>
+        <div className="timestamp">
+          {new Date(timestamp).toLocaleDateString("en-us", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
+        </div>
+      </FlexContainer1>
       <FlexContainer>
         {published ? (
           <button onClick={togglePublishPost}>unpublish</button>
