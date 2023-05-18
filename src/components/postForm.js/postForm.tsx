@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IPost } from "../../App";
 import styled from "styled-components";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 import parse from "html-react-parser";
 import Tiptap from "./tiptap";
 
@@ -20,9 +19,39 @@ interface IPostFormProps {
   JWT: string;
   currentPost?: IPost | null;
 }
+interface IContainerProps {
+  display?: string;
+  flexDirection?: string;
+  justifyContent?: string;
+  alignItems?: string;
+  fontSize?: string;
+  minWidth?: string;
+  maxWidth?: string;
+  backgroundColor?: string;
+  padding?: string;
+}
 const Container = styled.div`
   margin: 2rem auto;
-  width: 80%;
+  min-width: ${(props: IContainerProps) =>
+    props.minWidth ? props.minWidth : "unset"};
+  max-width: ${(props: IContainerProps) =>
+    props.maxWidth ? props.maxWidth : "unset"};
+  font-size: 2rem;
+`;
+const SubmitButton = styled.button`
+  border-radius: 10px;
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+const PostInput = styled.input`
+  font-size: 2rem;
+`;
+const PostLabel = styled.label`
+  font-size: 2rem;
 `;
 
 const PostForm = ({
@@ -88,19 +117,19 @@ const PostForm = ({
     }
   }
   return (
-    <Container>
-      <label htmlFor="title">title:</label>
+    <Container minWidth="15rem" maxWidth="70rem">
+      <PostLabel htmlFor="title">title:</PostLabel>
 
-      <input
+      <PostInput
         type="text"
         id="title"
         name="title"
         value={title1!}
         onChange={(e) => handleChange(e)}
       />
-      <label htmlFor="title">category:</label>
+      <PostLabel htmlFor="title">category:</PostLabel>
 
-      <input
+      <PostInput
         type="text"
         id="category"
         name="category"
@@ -111,9 +140,7 @@ const PostForm = ({
         <Tiptap content={content1} onChange={setContent1}></Tiptap>
       ) : null}
 
-      <button onClick={handleSubmit}> post</button>
-      <div>{parse(content1!)}</div>
-      <div>{content1!}</div>
+      <SubmitButton onClick={handleSubmit}> post</SubmitButton>
     </Container>
   );
 };

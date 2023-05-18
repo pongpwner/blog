@@ -6,6 +6,12 @@ import TextStyle from "@tiptap/extension-text-style";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import React from "react";
+import styled from "styled-components";
+const MenuContainer = styled.div`
+  background-color: white;
+  border-radius: 10px;
+`;
+
 //@ts-ignore
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -20,7 +26,7 @@ const MenuBar = ({ editor }) => {
     }
   };
   return (
-    <>
+    <MenuContainer>
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -148,7 +154,7 @@ const MenuBar = ({ editor }) => {
         purple
       </button>
       <button onClick={addImage}>add image from URL</button>
-    </>
+    </MenuContainer>
   );
 };
 //@ts-ignore

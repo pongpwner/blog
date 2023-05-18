@@ -2,13 +2,21 @@
 .text-editor {
   border: 1px solid black;
   border-radius: 10px;
+  min-width: 15rem;
+  max-width: 70rem;
+  margin-top: 2rem;
+
   button {
     margin: 5px;
     font-size: 1.6rem;
   }
   .ProseMirror {
-    padding: 1rem;
+    padding: 2rem 3rem;
     border-top: 1px solid black;
+    font-size: 2rem;
+    background-color: #3b3b3b;
+    border-radius: 10px;
+    border: 1px solid white;
     > * + * {
       margin-top: 0.75em;
     }
@@ -49,8 +57,10 @@
     }
 
     img {
-      max-width: 100%;
-      height: auto;
+      display: block;
+      max-width: 80%;
+      max-height: 50rem;
+      margin: 0 auto;
     }
 
     blockquote {

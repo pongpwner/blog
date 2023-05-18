@@ -12,6 +12,10 @@ const HeaderContainer = styled.header`
   display: flex;
   gap: 1rem;
   justify-content: center;
+  font-size: 2rem;
+  a {
+    color: #f7f7f7;
+  }
 `;
 const Header = ({ user, setUser, setJWT, setPosts }: IHeaderProps) => {
   return (
