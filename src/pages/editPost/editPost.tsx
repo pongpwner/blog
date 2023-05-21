@@ -4,9 +4,16 @@ import { useParams, Link } from "react-router-dom";
 import { IPost } from "../../App";
 import CommentList from "../../components/commentList/commentList";
 import { origin } from "../../App";
+import styled from "styled-components";
 interface IEditPost {
   JWT: string;
 }
+
+const CommentHeading = styled.h2`
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+`;
 const EditPost = ({ JWT }: IEditPost) => {
   const [currentPost, setCurrentPost] = useState<IPost | null>(null);
   const { postId } = useParams();
@@ -37,7 +44,7 @@ const EditPost = ({ JWT }: IEditPost) => {
         actionRoute={`${origin}/posts/${postId}`}
       ></PostForm>
 
-      <h2>comments</h2>
+      <CommentHeading>Comments</CommentHeading>
       <CommentList JWT={JWT}></CommentList>
     </div>
   );

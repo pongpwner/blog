@@ -1,2 +1,13 @@
 .sign-in-form {
+  display: flex;
+  justify-content: center;
+  label,
+  input {
+    font-size: 2rem;
+  }
+  button {
+    font-size: 2rem;
+    padding: 0.3rem 1rem;
+    margin-left: 2rem;
+  }
 }

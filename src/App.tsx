@@ -11,7 +11,7 @@ import GlobalStyle from "./global.styles";
 //import PostComments from "./pages/postComment/postComments";
 //https://blog-api-production-9a5f.up.railway.app
 //http://localhost:5000
-export const origin = "http://localhost:5000";
+export const origin = "https://blog-api-production-9a5f.up.railway.app";
 export interface IPost {
   _id: string;
   title: string;
@@ -76,9 +76,3 @@ function App() {
 }
 
 export default App;
-{
-  /* <Route
-path="/posts/:postId/comments"
-element={<PostComments></PostComments>}
-></Route> */
-}

@@ -20,11 +20,16 @@
     > * + * {
       margin-top: 0.75em;
     }
+    ul {
+      list-style: disc;
+    }
+    ol {
+      list-style: decimal-leading-zero;
+    }
 
     ul,
     ol {
       padding: 0 1rem;
-      list-style: disc;
     }
 
     h1,
@@ -58,14 +63,14 @@
 
     img {
       display: block;
-      max-width: 80%;
+      max-width: 70rem;
       max-height: 50rem;
       margin: 0 auto;
     }
 
     blockquote {
       padding-left: 1rem;
-      border-left: 2px solid rgba(#0d0d0d, 0.1);
+      border-left: 3px solid rgba(#ffffff, 0.4);
     }
 
     hr {

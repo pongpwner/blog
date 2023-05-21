@@ -3,18 +3,28 @@ import styled from "styled-components";
 import { origin } from "../../App";
 const P = styled.p`
   overflow-wrap: break-word;
+  font-size: 2rem;
 `;
 const Author = styled.span`
   font-weight: 700;
+  font-size: 2rem;
 `;
 const Li = styled.li`
   margin: 2rem 3rem;
+  font-size: 2rem;
 `;
 const Time = styled.span`
   font-style: italic;
+  font-size: 2rem;
 `;
 const Content = styled.p`
   overflow-wrap: break-word;
+  font-size: 2rem;
+`;
+const DeleteButton = styled.button`
+  padding: 0.5rem 1rem;
+  margin: 0 1rem;
+  font-size: 1.5rem;
 `;
 
 interface ICommentProps {
@@ -55,7 +65,7 @@ const Comment = ({
           day: "numeric",
         })}
       </Time>
-      <button onClick={deleteComment}>delete comment</button>
+      <DeleteButton onClick={deleteComment}>delete comment</DeleteButton>
     </Li>
   );
 };

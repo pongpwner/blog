@@ -7,11 +7,28 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import React from "react";
 import styled from "styled-components";
+import { FaBold } from "react-icons/fa";
+import { FaHeading } from "react-icons/fa";
+import { FaItalic } from "react-icons/fa";
+import { FaCode } from "react-icons/fa";
+import { FaStrikethrough } from "react-icons/fa";
+import { FaListUl } from "react-icons/fa";
+import { FaListOl } from "react-icons/fa";
+import { FaParagraph } from "react-icons/fa";
+import { FaQuoteLeft } from "react-icons/fa";
+interface IColorProps {
+  backgroundColor: string;
+}
 const MenuContainer = styled.div`
   background-color: white;
   border-radius: 10px;
 `;
-
+const ColorButton = styled.button`
+  background-color: ${(props: IColorProps) =>
+    props.backgroundColor ? props.backgroundColor : "unset"};
+  width: 2.5rem;
+  height: 2.5rem;
+`;
 //@ts-ignore
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -32,88 +49,21 @@ const MenuBar = ({ editor }) => {
         disabled={!editor.can().chain().focus().toggleBold().run()}
         className={editor.isActive("bold") ? "is-active" : ""}
       >
-        bold
+        <FaBold></FaBold>
       </button>
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         disabled={!editor.can().chain().focus().toggleItalic().run()}
         className={editor.isActive("italic") ? "is-active" : ""}
       >
-        italic
+        <FaItalic></FaItalic>
       </button>
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
         disabled={!editor.can().chain().focus().toggleStrike().run()}
         className={editor.isActive("strike") ? "is-active" : ""}
       >
-        strike
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleCode().run()}
-        disabled={!editor.can().chain().focus().toggleCode().run()}
-        className={editor.isActive("code") ? "is-active" : ""}
-      >
-        code
-      </button>
-      <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-        clear marks
-      </button>
-      <button onClick={() => editor.chain().focus().clearNodes().run()}>
-        clear nodes
-      </button>
-      <button
-        onClick={() => editor.chain().focus().setParagraph().run()}
-        className={editor.isActive("paragraph") ? "is-active" : ""}
-      >
-        paragraph
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={editor.isActive("heading", { level: 1 }) ? "is-active" : ""}
-      >
-        h1
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive("heading", { level: 2 }) ? "is-active" : ""}
-      >
-        h2
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        className={editor.isActive("heading", { level: 3 }) ? "is-active" : ""}
-      >
-        h3
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-        className={editor.isActive("heading", { level: 4 }) ? "is-active" : ""}
-      >
-        h4
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-        className={editor.isActive("heading", { level: 5 }) ? "is-active" : ""}
-      >
-        h5
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-        className={editor.isActive("heading", { level: 6 }) ? "is-active" : ""}
-      >
-        h6
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={editor.isActive("bulletList") ? "is-active" : ""}
-      >
-        bullet list
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleOrderedList().run()}
-        className={editor.isActive("orderedList") ? "is-active" : ""}
-      >
-        ordered list
+        <FaStrikethrough></FaStrikethrough>
       </button>
       <button
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
@@ -122,17 +72,51 @@ const MenuBar = ({ editor }) => {
         code block
       </button>
       <button
+        onClick={() => editor.chain().focus().toggleCode().run()}
+        disabled={!editor.can().chain().focus().toggleCode().run()}
+        className={editor.isActive("code") ? "is-active" : ""}
+      >
+        <FaCode></FaCode>
+      </button>
+
+      <button
+        onClick={() => editor.chain().focus().setParagraph().run()}
+        className={editor.isActive("paragraph") ? "is-active" : ""}
+      >
+        <FaParagraph></FaParagraph>
+      </button>
+
+      <button
+        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+        className={editor.isActive("heading", { level: 2 }) ? "is-active" : ""}
+      >
+        <FaHeading></FaHeading>
+      </button>
+
+      <button
+        onClick={() => editor.chain().focus().toggleBulletList().run()}
+        className={editor.isActive("bulletList") ? "is-active" : ""}
+      >
+        <FaListUl></FaListUl>
+      </button>
+      <button
+        onClick={() => editor.chain().focus().toggleOrderedList().run()}
+        className={editor.isActive("orderedList") ? "is-active" : ""}
+      >
+        <FaListOl></FaListOl>
+      </button>
+
+      <button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={editor.isActive("blockquote") ? "is-active" : ""}
       >
-        blockquote
+        <FaQuoteLeft></FaQuoteLeft>
       </button>
       <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
         horizontal rule
       </button>
-      <button onClick={() => editor.chain().focus().setHardBreak().run()}>
-        hard break
-      </button>
+      <button onClick={addImage}>add image from URL</button>
+
       <button
         onClick={() => editor.chain().focus().undo().run()}
         disabled={!editor.can().chain().focus().undo().run()}
@@ -145,15 +129,34 @@ const MenuBar = ({ editor }) => {
       >
         redo
       </button>
-      <button
+      <ColorButton
+        backgroundColor="#fffb00"
+        onClick={() => editor.chain().focus().setColor("#fffb00").run()}
+        className={
+          editor.isActive("textStyle", { color: "#fffb00" }) ? "is-active" : ""
+        }
+      ></ColorButton>
+      <ColorButton
+        backgroundColor="#0042ea"
+        onClick={() => editor.chain().focus().setColor("#0042ea").run()}
+        className={
+          editor.isActive("textStyle", { color: "#0042ea" }) ? "is-active" : ""
+        }
+      ></ColorButton>
+      <ColorButton
+        backgroundColor="#f50056"
+        onClick={() => editor.chain().focus().setColor("#f50056").run()}
+        className={
+          editor.isActive("textStyle", { color: "#f50056" }) ? "is-active" : ""
+        }
+      ></ColorButton>
+      <ColorButton
+        backgroundColor="#958DF1"
         onClick={() => editor.chain().focus().setColor("#958DF1").run()}
         className={
           editor.isActive("textStyle", { color: "#958DF1" }) ? "is-active" : ""
         }
-      >
-        purple
-      </button>
-      <button onClick={addImage}>add image from URL</button>
+      ></ColorButton>
     </MenuContainer>
   );
 };
@@ -180,7 +183,7 @@ export default ({ content, onChange }) => {
 
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
-      console.log(html);
+
       onChange(html);
     },
   });

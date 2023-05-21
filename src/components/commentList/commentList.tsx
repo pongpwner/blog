@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Comment from "../comment/comment";
 import { origin } from "../../App";
+import styled from "styled-components";
 export interface IComment {
   _id?: string;
   author: string;
@@ -12,6 +13,11 @@ export interface IComment {
 interface ICommentListProps {
   JWT: string;
 }
+const Container = styled.ul`
+  margin: 0 auto;
+  max-width: 70rem;
+  max-height: 50rem;
+`;
 const CommentList = ({ JWT }: ICommentListProps) => {
   const [comments, setComments] = useState<[IComment] | null>(null);
   const { postId } = useParams();
@@ -33,7 +39,7 @@ const CommentList = ({ JWT }: ICommentListProps) => {
   }, []);
 
   return comments ? (
-    <ul>
+    <Container>
       {comments.map((comment) => (
         <Comment
           author={comment.author}
@@ -44,7 +50,7 @@ const CommentList = ({ JWT }: ICommentListProps) => {
           JWT={JWT}
         />
       ))}
-    </ul>
+    </Container>
   ) : (
     <div>there are no comments</div>
   );

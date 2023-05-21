@@ -12,7 +12,8 @@ const HeaderContainer = styled.header`
   display: flex;
   gap: 1rem;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
+  margin: 2rem 0;
   a {
     color: #f7f7f7;
   }

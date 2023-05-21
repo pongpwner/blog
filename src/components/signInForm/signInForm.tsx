@@ -2,10 +2,12 @@ import "./signInForm.scss";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { origin } from "../../App";
+import styled from "styled-components";
 interface signInFormProps {
   setJWT: Function;
   setUser: Function;
 }
+
 const SignInForm = ({ setJWT, setUser }: signInFormProps) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");

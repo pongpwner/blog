@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PostForm from "../../components/postForm.js/postForm";
 import { origin } from "../../App";
+
 interface ICreatePostProps {
   JWT: string;
 }

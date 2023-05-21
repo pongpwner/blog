@@ -47,6 +47,7 @@ const SubmitButton = styled.button`
     cursor: pointer;
   }
 `;
+
 const PostInput = styled.input`
   font-size: 2rem;
 `;
@@ -77,7 +78,14 @@ const PostForm = ({
       setCategory1(currentPost.category);
     }
   }, [currentPost]);
+  //@ts-ignore
+  function createForm() {
+    if (method === "POST") {
+      return <Tiptap content={""} onChange={setContent1}></Tiptap>;
+    }
 
+    return null;
+  }
   function handleChange(
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -96,7 +104,7 @@ const PostForm = ({
 
   async function handleSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
-    console.log("submit");
+
     let response = await fetch(actionRoute, {
       method: method,
       credentials: "include",
@@ -116,6 +124,7 @@ const PostForm = ({
       navigate("/dashboard");
     }
   }
+
   return (
     <Container minWidth="15rem" maxWidth="70rem">
       <PostLabel htmlFor="title">title:</PostLabel>
@@ -136,9 +145,11 @@ const PostForm = ({
         value={category1!}
         onChange={(e) => handleChange(e)}
       />
-      {content1 ? (
+      {content1 && method === "PUT" ? (
         <Tiptap content={content1} onChange={setContent1}></Tiptap>
       ) : null}
+
+      {createForm()}
 
       <SubmitButton onClick={handleSubmit}> post</SubmitButton>
     </Container>

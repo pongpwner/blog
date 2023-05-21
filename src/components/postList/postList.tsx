@@ -17,7 +17,7 @@ const PostList = ({ posts, JWT }: IPostListProps) => {
                 id={post._id}
                 title={post.title}
                 content={post.content}
-                category={post.category}
+                category={post.category!}
                 timestamp={post.timestamp}
                 published={post.published}
                 JWT={JWT}

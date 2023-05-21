@@ -2,10 +2,25 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { origin } from "../../App";
+
+const Container = styled.li`
+  border: 1px solid white;
+  margin: 1rem 2rem;
+`;
+const CustomButton = styled.button`
+  padding: 1rem 2rem;
+  font-size: 2rem;
+`;
 const FlexContainer = styled.div`
   display: flex;
   gap: 1rem;
   justify-content: center;
+  font-size: 2rem;
+  margin: 1rem 0;
+  a {
+    color: white;
+    font-size: 2rem;
+  }
 `;
 const FlexContainer1 = styled.div`
   display: flex;
@@ -13,12 +28,13 @@ const FlexContainer1 = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  font-size: 2rem;
 `;
 interface IPostProps {
   id: string;
   title: string;
   content: string;
-  category: string | undefined;
+  category: string;
   timestamp: Date;
   published: boolean;
   JWT: string;
@@ -75,7 +91,7 @@ const Post = ({
     window.location.reload();
   }
   return (
-    <li className="post">
+    <Container className="post">
       <FlexContainer1>
         <h2 className="title">{title}</h2>
         <div>{category}</div>
@@ -89,15 +105,16 @@ const Post = ({
       </FlexContainer1>
       <FlexContainer>
         {published ? (
-          <button onClick={togglePublishPost}>unpublish</button>
+          <CustomButton onClick={togglePublishPost}>unpublish</CustomButton>
         ) : (
-          <button onClick={togglePublishPost}>publish</button>
+          <CustomButton onClick={togglePublishPost}>publish</CustomButton>
         )}
+
         <Link to={`/posts/${id}`}>edit</Link>
 
-        <button onClick={deletePost}>delete</button>
+        <CustomButton onClick={deletePost}>delete</CustomButton>
       </FlexContainer>
-    </li>
+    </Container>
   );
 };
 
